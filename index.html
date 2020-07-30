@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+
+                    <input id="formControl" class="form-control" type="text">
+                    <button id="generate" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <div id="screen">
+                    <input  class="form-control" type="text" id="screen-input" value="0">
+                    </div>
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              <div class="button"  onclick="buttonClick('7')" >7</div>
+                              <div class="button" onclick="buttonClick('8')">8</div>
+                              <div class="button"  onclick="buttonClick('9')">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button"  onclick="buttonClick('4')">4</div>
+                              <div class="button" onclick="buttonClick('5')">5</div>
+                              <div class="button"  onclick="buttonClick('6')">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" onclick="buttonClick('1')">1</div>
+                              <div class="button" onclick="buttonClick('2')">2</div>
+                              <div class="button" onclick="buttonClick('3')">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" onclick="backSpace()">&lt;</div>
+                                <div class="button" onclick="buttonClick('0')">0</div>
+                                <div class="button" onclick="buttonClick('')">C</div>
+                            </div>
+                            <div>
+                                <button id="submitBtn" type="submit" class="submit-btn">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="pinNotMatched" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="pinMatched" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+        <script>
+            //const footer = document.getElementById('footer');
+            //footer.style.display = 'none';
+            
+                const pinMatch =document.getElementById('pinMatched');
+               pinMatch.style.display = "none";
+             const pinNotMatch = document.getElementById('pinNotMatched')
+             pinNotMatch.style.display = "none";
+
+         const generate = document.getElementById('generate');
+                 generate.addEventListener('click', function(){
+                //    generate.innerHTML =  Math.floor((Math.random()*10000)+1);
+                generate.innerHTML = Math.floor(1000 + Math.random()*9000);
+                let totalGenerate = generate.innerHTML;
+             document.getElementById('formControl').value = totalGenerate;
+ })
+
+ document.getElementById('screen-input').value = '';
+function buttonClick(num){
+   let screen = document.getElementById('screen-input');
+   screen.value += num;
+    if(num == ''){
+        screen.value = num;
+    }
+}
+function backSpace(){
+    var screen = document.getElementById('screen-input').value;
+    var backSpace = screen.slice(0, screen.length - 1);
+    document.getElementById('screen-input').value = backSpace;
+}
+  //const pinMatched = document.getElementById("pinMatched");
+ //pinMatched.style.display = 'block' ;
+// let formControl = document.getElementById('formControl').value;
+      /// let totalGenerate = parseFloat(formControl);
+
+       
+      // let screenInput = document.getElementById('screen-input').value;
+       // let totalInput = parseFloat(screenInput);
+        
+
+// const submitBtn = document.getElementById('submitBtn');
+   //submitBtn.addEventListener('click', function(){
+        
+    //    let formControl = document.getElementById('formControl').value;
+        //let totalGenerate = parseFloat(formControl);
+          
+       // let screenInput = document.getElementById('screen-input').value;
+        //let totalInput = parseFloat(screenInput);
+        
+        //if(totalInput == totalGenerate){
+           // let pinMatched = document.getElementById("pinMatched");
+ //pinMatched.style.display = 'block' ;
+        //}
+    //})
+
+    document.getElementById('submitBtn').addEventListener('click', function(){
+            if(document.getElementById('formControl').value == ""){
+                alert('Generate a pin number');
+            }
+            else if(document.getElementById('screen-input').value==""){
+                alert('Enter the number');
+            }
+            else if(document.getElementById('formControl').value == document.getElementById('screen-input').value){
+                const pinMatch = document.getElementById("pinMatched");
+                pinMatch.style.display = "block";
+            }
+            
+            else{
+                const pinNotMatch = document.getElementById("pinNotMatched");
+                pinNotMatch.style.display = "block";
+            }
+        })
+
+</script>
+
+    </div>
+  
+</body>
+</html>
